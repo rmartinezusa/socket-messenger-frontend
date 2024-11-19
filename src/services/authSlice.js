@@ -11,7 +11,7 @@ const authApi = api.injectEndpoints({
                 method: "POST",
                 body: credentials,
             }),
-            invalidatesTags: [""],
+            invalidatesTags: ["User"],
         }),
         // login
         login: builder.mutation({
@@ -20,7 +20,7 @@ const authApi = api.injectEndpoints({
                 method: "POST",
                 body: credentials,
             }),
-            invalidatesTags: [""],
+            invalidatesTags: ["User"],
         }),
     }),
 });
@@ -31,6 +31,7 @@ export const { useLoginMutation, useRegisterMutation } = authApi;
 const TOKEN_KEY = "token";
 
 // store token in state and session
+
 const storeToken = (state, { payload }) => {
     state.token = payload.token;
     sessionStorage.setItem(TOKEN_KEY, payload.token);
@@ -49,7 +50,7 @@ const authSlice = createSlice({
         },
     },
     // update token for mutations
-    extraReducers: () => {
+    extraReducers: (builder) => {
         builder.addMatcher(api.endpoints.login.matchFulfilled, storeToken);
         builder.addMatcher(api.endpoints.register.matchFulfilled, storeToken);
     },
