@@ -18,10 +18,10 @@ function Login() {
             setError(null); 
             const userData = { username, password };
             await login(userData).unwrap();
-            navigate("/");
+            navigate("/inbox");
         } catch (e) {
-            console.error(errorMessage);
-            setError(errorMessage);
+            console.error(e);
+            setError(e);
         }
     }
 
@@ -37,7 +37,7 @@ function Login() {
                     Password
                     <input  type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Enter you password." required/>
                 </label>
-                <button className="positive-action" type="submit" disabled={loginLoading}>
+                <button type="submit" disabled={loginLoading}>
                     { loginLoading ? "Login in to account..." : "Login" }
                 </button>
             </form>
