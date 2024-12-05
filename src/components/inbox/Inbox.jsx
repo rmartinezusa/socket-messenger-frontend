@@ -1,9 +1,18 @@
-
+import { io } from "socket.io-client";
+const socket = io.connect()
 
 function Inbox() {
+
+    function sendMessage(){
+
+    }
+
     return(
         <section>
-            <h1>Inbox</h1>
+            <label>
+                <input placeholder="Message..." />
+            </label>
+            <button>Send</button>
         </section>
     );
 }
